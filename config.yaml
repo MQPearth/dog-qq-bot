@@ -1,0 +1,38 @@
+server:
+  port: 19997
+  ## debug/release
+  gin-mode: "debug"
+
+qq-bot:
+  address: 192.168.93.136:3001
+  ## 机器人qq
+  qq: 11111111
+  ## 启用机器人的群
+  active-group:
+    - 1111111111
+
+mysql:
+  url: "192.168.93.136"
+  port: "3306"
+  config: "charset=utf8mb4&parseTime=True&loc=Local"
+  db-name: "qq_bot"
+  username: "root"
+  password: "123465"
+  prefix: ""
+  singular: false
+  engine: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+
+zap:
+  level: debug
+  prefix: ''
+  format: console
+  director: log
+  encode-level: CapitalColorLevelEncoder
+  stacktrace-key: stacktrace
+  max-age: 2
+  show-line: true
+  log-in-console: true

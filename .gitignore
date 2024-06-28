@@ -1,0 +1,5 @@
+/.idea
+go.sum
+/log
+/log/*
+config-dev.yaml
