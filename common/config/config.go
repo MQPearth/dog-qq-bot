@@ -9,4 +9,6 @@ type Config struct {
 	Server Server `mapstructure:"server" yaml:"server"`
 	// QQBot
 	QQBot QQBot `mapstructure:"qq-bot" yaml:"qq-bot"`
+	// ai
+	Ai Ai `mapstructure:"ai" yaml:"ai"`
 }

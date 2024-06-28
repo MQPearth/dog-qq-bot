@@ -36,6 +36,9 @@ func main() {
 	// 初始化路由
 	routers := initialize.Routers()
 
+	// 初始化ai
+	initialize.Ai()
+
 	port := fmt.Sprintf(":%d", global.GConfig.Server.Port)
 
 	apiServer := initialize.InitServer(port, routers)

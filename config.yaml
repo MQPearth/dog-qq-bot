@@ -11,6 +11,11 @@ qq-bot:
   active-group:
     - 1111111111
 
+## 百度ai
+ai:
+  access-key: 123123
+  secret-key: 123132
+
 mysql:
   url: "192.168.93.136"
   port: "3306"
