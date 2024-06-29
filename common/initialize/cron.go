@@ -25,7 +25,7 @@ func Cron() {
 		return
 	}
 
-	_, err = global.GCron.AddFunc("49 21 * * *", service.ServiceGroup.CronService.SendGhostStories)
+	_, err = global.GCron.AddFunc("44 1 * * *", service.ServiceGroup.CronService.SendGhostStories)
 
 	if err != nil {
 		global.GLog.Error("SendGhostStories", zap.Error(err))

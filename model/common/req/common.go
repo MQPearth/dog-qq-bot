@@ -10,19 +10,19 @@ type BaseData struct {
 
 type MsgData struct {
 	BaseData
-	UserID     int       `json:"user_id"`
-	MessageID  int       `json:"message_id"`
-	MessageSeq int       `json:"message_seq"`
-	RealID     int       `json:"real_id"`
+	UserID     int64     `json:"user_id"`
+	MessageID  int64     `json:"message_id"`
+	MessageSeq int64     `json:"message_seq"`
+	RealID     int64     `json:"real_id"`
 	Sender     Sender    `json:"sender"`
 	RawMessage string    `json:"raw_message"`
 	Font       int       `json:"font"`
 	SubType    string    `json:"sub_type"`
 	Message    []Message `json:"message"`
-	GroupID    int       `json:"group_id"`
+	GroupID    int64     `json:"group_id"`
 }
 type Sender struct {
-	UserID   int    `json:"user_id"`
+	UserID   int64  `json:"user_id"`
 	Nickname string `json:"nickname"`
 	Card     string `json:"card"`
 	Role     string `json:"role"`

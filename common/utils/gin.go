@@ -21,7 +21,7 @@ func Options() gin.HandlerFunc {
 	}
 }
 
-func ByteToJson(jsonStr []byte, data interface{}) {
+func ByteToStruct(jsonStr []byte, data interface{}) {
 	decoder := json.NewDecoder(bytes.NewReader(jsonStr))
 	if err := decoder.Decode(data); err != nil {
 		panic(err)

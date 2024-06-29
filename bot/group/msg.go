@@ -7,7 +7,7 @@ import (
 )
 
 // SendGroupMsg 发送群聊消息
-func SendGroupMsg(id int, content string) {
+func SendGroupMsg(id int64, content string) {
 
 	msg := req.Message{
 		Data: req.Data{Text: content},
@@ -22,10 +22,10 @@ func SendGroupMsg(id int, content string) {
 }
 
 // SendAtGroupMsg 发送群聊艾特消息
-func SendAtGroupMsg(id int, userId int, content string) {
+func SendAtGroupMsg(id int64, userId int64, content string) {
 	var msgArr [2]req.Message
 	msgArr[0] = req.Message{
-		Data: req.Data{Qq: strconv.Itoa(userId)},
+		Data: req.Data{Qq: strconv.FormatInt(userId, 10)},
 		Type: "at",
 	}
 

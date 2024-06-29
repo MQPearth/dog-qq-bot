@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"qq-bot/bot/group"
+	"qq-bot/common/cons"
 	"qq-bot/common/global"
 	"qq-bot/common/utils"
 	"qq-bot/model/common/req"
@@ -38,7 +39,7 @@ func (a *EventApi) Post(c *gin.Context) {
 		return
 	}
 	var data req.BaseData
-	utils.ByteToJson(rawData, &data)
+	utils.ByteToStruct(rawData, &data)
 
 	// 通知类型不是消息的不处理
 	if data.PostType != "message" {
@@ -57,7 +58,7 @@ func (a *EventApi) Post(c *gin.Context) {
 	}
 
 	var msg req.MsgData
-	utils.ByteToJson(rawData, &msg)
+	utils.ByteToStruct(rawData, &msg)
 
 	if !global.GConfig.QQBot.IsActive(msg.GroupID) {
 		resp.EmptyOk(c)
@@ -86,9 +87,9 @@ func (a *EventApi) Post(c *gin.Context) {
 		if random >= 0 && random < 6 {
 			// 复读
 			group.SendGroupMsg(msg.GroupID, msg.Message[0].Data.Text)
-		} else if random >= 52 && random < 57 {
+		} else if random >= 52 && random < 56 {
 			// 阴阳
-			content := dbService.RandomGetOne(3)
+			content := dbService.RandomGetOne(cons.YinYang)
 			group.SendGroupMsg(msg.GroupID, content)
 		} else if random >= 94 && random < 100 {
 			// ?
