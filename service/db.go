@@ -13,6 +13,10 @@ func (b *DbService) RandomGetOne(typ int) string {
 
 	length := len(global.GStory[typ])
 
+	if length == 0 {
+		return "尚未加载"
+	}
+
 	id := global.GStory[typ][utils.RandomInt(length)]
 
 	var story string

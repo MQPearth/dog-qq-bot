@@ -14,7 +14,21 @@ func Cron() {
 	_, err := global.GCron.AddFunc("*/1 * * * *", service.ServiceGroup.CronService.LoadStory)
 
 	if err != nil {
-		global.GLog.Error("cron", zap.Error(err))
+		global.GLog.Error("LoadStory", zap.Error(err))
+		return
+	}
+
+	_, err = global.GCron.AddFunc("30 7 * * *", service.ServiceGroup.CronService.SendInspirationalStory)
+
+	if err != nil {
+		global.GLog.Error("SendInspirationalStory", zap.Error(err))
+		return
+	}
+
+	_, err = global.GCron.AddFunc("49 21 * * *", service.ServiceGroup.CronService.SendGhostStories)
+
+	if err != nil {
+		global.GLog.Error("SendGhostStories", zap.Error(err))
 		return
 	}
 
