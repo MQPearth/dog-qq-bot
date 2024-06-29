@@ -38,6 +38,8 @@ func main() {
 
 	// 初始化ai
 	initialize.Ai()
+	// 定时任务
+	initialize.Cron()
 
 	port := fmt.Sprintf(":%d", global.GConfig.Server.Port)
 

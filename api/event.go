@@ -86,10 +86,11 @@ func (a *EventApi) Post(c *gin.Context) {
 		if random >= 0 && random < 6 {
 			// 复读
 			group.SendGroupMsg(msg.GroupID, msg.Message[0].Data.Text)
-		} else if random >= 6 && random < 11 {
+		} else if random >= 52 && random < 57 {
 			// 阴阳
-
-		} else if random >= 11 && random < 17 {
+			content := dbService.RandomGetOne(3)
+			group.SendGroupMsg(msg.GroupID, content)
+		} else if random >= 94 && random < 100 {
 			// ?
 			group.SendGroupMsg(msg.GroupID, "?")
 		}

@@ -2,6 +2,7 @@ package service
 
 type ServiceGroupEnter struct {
 	DbService
+	CronService
 }
 
 var (
