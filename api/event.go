@@ -5,6 +5,7 @@ import (
 	"github.com/baidubce/bce-qianfan-sdk/go/qianfan"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"qq-bot/bot/group"
 	"qq-bot/common/global"
 	"qq-bot/common/utils"
 	"qq-bot/model/common/req"
@@ -63,28 +64,37 @@ func (a *EventApi) Post(c *gin.Context) {
 		return
 	}
 
-	//TODO 复读逻辑 控制概率大概在1/15左右
-
-	//TODO 阴阳怪气逻辑 控制概率大概在1/20左右
-
 	// 如果第一个消息数组第一个是@类型 且 @对象是机器人 才进行回复
-	if msg.Message[0].Type != "at" || msg.Message[0].Data.Qq != global.GConfig.QQBot.Qq {
-		resp.EmptyOk(c)
-		return
-	}
-
-	// 如果只进行了@, 而没有内容, 则回复一个简短的问号
-	// 如果消息数组长度为2, 则进行AI回复
-	if len(msg.Message) == 1 {
-		resp.ReplyOk(c, "？")
-	} else if len(msg.Message) == 2 {
-		if msg.Message[1].Type == "text" {
-
-			resp.ReplyOk(c, aiMsg(msg.Message[1].Data.Text))
+	if msg.Message[0].Type == "at" && msg.Message[0].Data.Qq == global.GConfig.QQBot.Qq {
+		// 如果只进行了@, 而没有内容, 则回复一个简短的问号
+		// 如果消息数组长度为2, 且第二个消息段是文本 则进行AI回复
+		if len(msg.Message) == 1 {
+			resp.ReplyOk(c, "？")
+			return
+		} else if len(msg.Message) == 2 {
+			if msg.Message[1].Type == "text" {
+				resp.ReplyOk(c, aiMsg(msg.Message[1].Data.Text))
+				return
+			}
 		}
-	} else {
-		resp.EmptyOk(c)
-		return
 	}
 
+	if msg.Message[0].Type == "text" {
+		random := utils.RandomInt(100)
+		global.GLog.Debug("随机数字: ", zap.Int("random", random))
+
+		if random >= 0 && random < 6 {
+			// 复读
+			group.SendGroupMsg(msg.GroupID, msg.Message[0].Data.Text)
+		} else if random >= 6 && random < 11 {
+			// 阴阳
+
+		} else if random >= 11 && random < 17 {
+			// ?
+			group.SendGroupMsg(msg.GroupID, "?")
+		}
+	}
+
+	resp.EmptyOk(c)
+	return
 }

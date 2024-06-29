@@ -3,6 +3,7 @@ package initialize
 import (
 	"github.com/baidubce/bce-qianfan-sdk/go/qianfan"
 	"qq-bot/common/global"
+	"strings"
 )
 
 func Ai() {
@@ -14,7 +15,7 @@ func Ai() {
 
 	// 支持的模型
 	list := global.GAi.ModelList()
-	for _, s := range list {
-		global.GLog.Debug(s)
-	}
+	result := strings.Join(list, ", ")
+	global.GLog.Debug("支持的模型")
+	global.GLog.Debug(result)
 }
