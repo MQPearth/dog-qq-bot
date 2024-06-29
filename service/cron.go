@@ -28,6 +28,13 @@ func (c *CronService) SendGhostStories() {
 			global.GLog.Error("SendGhostStories", zap.Any("info", err))
 		}
 	}()
+
+	randomInt := utils.RandomInt(100)
+
+	if randomInt > 2 {
+		return
+	}
+
 	content := ServiceGroup.DbService.RandomGetOne(cons.GhostStory)
 	for _, id := range global.GConfig.QQBot.ActiveGroup {
 		botId, _ := strconv.ParseInt(global.GConfig.QQBot.Qq, 10, 64)
